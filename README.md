@@ -4,7 +4,7 @@ proxy-object-defaults
 Makes nested JS objects easier to reason with. An experiment in using ES6 proxies (for fun and profit).
 
 ## Install
-`yarn install proxy-object-defaults`
+`yarn add proxy-object-defaults`
 
 ## Example
 ```javascript
