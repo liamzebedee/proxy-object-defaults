@@ -1,4 +1,8 @@
 {
+  "name": "proxy-object-defaults",
+  "description": "A simplified abstraction for nested defaults on objects, using ES6 Proxies.",
+  "version": "1.0.0",
+  "main": "lib/index.js",
   "scripts": {
     "build": "babel src -d lib",
     "start": "nodemon src/index.js --exec yarn build",
@@ -22,10 +26,6 @@
     "jest": "^23.1.0",
     "nodemon": "^1.17.5"
   },
-  "name": "proxy-object-defaults",
-  "description": "A simplified abstraction for nested defaults on objects, using ES6 Proxies.",
-  "version": "1.0.0",
-  "main": "index.js",
   "directories": {
     "lib": "lib"
   },
