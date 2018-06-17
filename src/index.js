@@ -1,14 +1,36 @@
-import moment from 'moment';
-import _ from 'underscore';
+import _ from 'lodash';
 
-export default function(time) {
-    if(!(time instanceof Date)) throw new Error("time must be a date");
+const isObject = obj => (obj !== null && typeof obj === 'object');
+const hasKey = (obj, key) => key in obj;
 
-    let ago = moment.duration(moment().diff(time));
-    
-    let times = [ago.years(), ago.weeks(), ago.days(), ago.hours(), ago.minutes(), ago.seconds(), ago.milliseconds(), 1]
-    let fmts = ['y', 'w', 'd', 'h', 'm', 's', 'ms', 'now']
-    let i = _.findIndex(times, x => x != 0);
+function handler(defaults) { 
+    return {
+        get(target, key) {
+            if(hasKey(target, key)) {
+                let prop = target[key];
+                if(isObject(prop)) {
+                    let nestedDefault = defaults[key];
+                    return _proxyDefaults(prop, nestedDefault);
+                } else {
+                    return prop;
+                }
+            } else if(hasKey(defaults, key)) {
+                let prop = defaults[key];
+                if(isObject(prop)) {
+                    return _proxyDefaults({}, prop);
+                } else {
+                    return prop;
+                }
+            }
+        }
+    };
+};
 
-    return `${times[i]}${fmts[i]}`;
+export default function proxyDefaults(obj, defaults, deepClone=true) {
+    if(deepClone) return _proxyDefaults(_.cloneDeep(obj), defaults);
+    else return _proxyDefaults(obj, defaults);
+}
+
+function _proxyDefaults(obj, defaults) {
+    return new Proxy(obj, handler(defaults));
 }

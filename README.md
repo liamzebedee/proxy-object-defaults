@@ -1,18 +1,44 @@
-spotify-style-times
-===================
+proxy-object-defaults
+=====================
 
-Generate Spotify-style timestamps like '5m' and '3h'. Always selects the most minimalist approximation of the time (ie. largest unique unit of time). Supports timing down to the millsecond.
+Makes nested JS objects easier to reason with. An experiment in using ES6 proxies (for fun and profit).
 
 ## Install
-`yarn install spotify-style-times`
+`yarn install proxy-object-defaults`
+
+## Example
+```javascript
+import proxyDefaults from 'proxy-object-defaults';
+
+const DEFAULT = {
+    filter: {
+        showTimes: false,
+        maxItems: 10
+    }
+}
+
+let userSettings = {
+    filter: {
+        maxItems: 20
+    }
+}
+
+let settings = proxyDefaults(userSettings, DEFAULT);
+console.log(settings.filter);
+// filter: {
+//     showTimes: false,
+//     maxItems: 20
+// }
+
+console.log(settings)
+// filter: {
+//    maxItems: 20
+// }
+
+delete settings.filter;
+console.log(settings)
+// {}
+```
 
 ## Usage
-See src/example.js for a full example.
-
-```javascript
-import spotifyStyleTime from 'spotify-style-times';
-import moment from 'moment';
-
-let exampleDate = moment().subtract(2, 'm');
-spotifyStyleTime(exampleDate); // 2m
-```
+`proxyDefaults(obj, defaults, deepClone=true)`

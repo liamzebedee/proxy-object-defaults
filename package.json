@@ -2,11 +2,11 @@
   "scripts": {
     "build": "babel src -d lib",
     "start": "nodemon src/index.js --exec yarn build",
-    "example": "yarn run babel-node src/example.js"
+    "prepublish": "npm run build",
+    "test": "jest src/"
   },
   "dependencies": {
-    "moment": "^2.22.1",
-    "underscore": "^1.9.0"
+    "lodash": "^4.17.10"
   },
   "babel": {
     "plugins": [
@@ -19,10 +19,11 @@
     "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
+    "jest": "^23.1.0",
     "nodemon": "^1.17.5"
   },
-  "name": "spotify-style-times",
-  "description": "Generate Spotify-style timestamps like '5m' and '3h'. Always selects the most minimalist approximation of the time (ie. largest unique unit of time).",
+  "name": "proxy-object-defaults",
+  "description": "A simplified abstraction for nested defaults on objects, using ES6 Proxies.",
   "version": "1.0.0",
   "main": "index.js",
   "directories": {
@@ -30,17 +31,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/liamzebedee/spotify-style-times.git"
+    "url": "git+ssh://git@github.com/liamzebedee/proxy-object-defaults.git"
   },
   "keywords": [
-    "times",
-    "dates",
-    "formatting"
+    "es6",
+    "defaults",
+    "proxies"
   ],
   "author": "liamzebedee",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/liamzebedee/spotify-style-times/issues"
+    "url": "https://github.com/liamzebedee/proxy-object-defaults/issues"
   },
-  "homepage": "https://github.com/liamzebedee/spotify-style-times#readme"
+  "homepage": "https://github.com/liamzebedee/proxy-object-defaults#readme"
 }
